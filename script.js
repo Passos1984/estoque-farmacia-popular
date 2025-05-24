@@ -9,12 +9,86 @@ document.addEventListener('DOMContentLoaded', function () {
     const excluirSelecionadosBtn = document.getElementById('excluir-selecionados');
 
     // Lista inicial dos 41 medicamentos (exemplo resumido, complete conforme desejar)
-    let medicamentos = JSON.parse(localStorage.getItem('medicamentos')) || [
-        {id: '001', nome: 'Losartana', principio: 'Losartana Potássica', lote: 'L001', dataEntrada: '2025-01-10', validade: '2027-01-10', quantidade: 100, fornecedor: 'FarmaDistribuidora'},
-        {id: '002', nome: 'Enalapril', principio: 'Enalapril Maleato', lote: 'L002', dataEntrada: '2025-02-05', validade: '2027-02-05', quantidade: 120, fornecedor: 'FarmaDistribuidora'},
-        {id: '003', nome: 'Hidroclorotiazida', principio: 'Hidroclorotiazida', lote: 'L003', dataEntrada: '2025-01-20', validade: '2027-01-20', quantidade: 90, fornecedor: 'MedPharma'},
-        // ... complete com os demais medicamentos ...
+    let medicamentos = [
+        // ...  
+        {
+            id: '01',
+            nome: 'ACETATO DE MEDROXIPROGESTERONA 150MG',
+            principio: 'ACETATO DE MEDROXIPROGESTERONA 150MG',
+            finalidade: 'ANTICONCEPÇÃO',
+            lote: 'L001',
+            dataEntrada: '2025-05-24',
+            validade: '2027-05-24',
+            quantidade: 100,
+            fornecedor: 'Fornecedor Padrão',
+            ean: '7891268101782'
+        },
+        // ... 
+        {
+            id: '02',
+            nome: 'SULFATO DE SALBUTAMOL 100MCG',
+            principio: 'ASMA',
+            finalidade: 'Asma',
+            lote: 'L002',
+            dataEntrada: '2025-05-24',
+            dataEntrada: ' 2025-05-24',
+            validade: '2026-06-12',
+            quantidade: '50',
+            fornecedor: 'Fornecedor Padrão',
+            ean: ''
+        },
+        
+            
+        {
+            id: '03',
+            nome: 'Forxiga',
+            principio: 'diabetes',
+            finalidade: '',
+            lote: 'l004',
+            dataEntrada: '2025-05-24',
+            validade: '2026-06-12',
+            quantidade: '50',
+            fornecedor: 'Fornecedor Padrão',
+            ean: ''
+        },
+        {
+            id: '',
+            nome: '',
+            principio: '',
+            finalidade: '',
+            lote: '',
+            dataEntrada: '',
+            validade: '',
+            quantidade: '',
+            fornecedor: 'Fornecedor Padrão',
+            ean: ''
+        },
+        {
+            id: '',
+            nome: '',
+            principio: '',
+            finalidade: '',
+            lote: '',
+            dataEntrada: '',
+            validade: '',
+            quantidade: '',
+            fornecedor: 'Fornecedor Padrão',
+            ean: ''
+        },
+        {
+            id: '',
+            nome: '',
+            principio: '',
+            finalidade: '',
+            lote: '',
+            dataEntrada: '',
+            validade: '',
+            quantidade: '',
+            fornecedor: 'Fornecedor Padrão',
+            ean: ''
+        },
     ];
+
 
     function salvarLocalStorage() {
         localStorage.setItem('medicamentos', JSON.stringify(medicamentos));
@@ -91,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        medicamentos.push({id, nome: medicacao, principio, lote, dataEntrada, validade, quantidade, fornecedor});
+        medicamentos.push({ id, nome: medicacao, principio, lote, dataEntrada, validade, quantidade, fornecedor });
         salvarLocalStorage();
         renderizarTabela();
         fecharModal();
