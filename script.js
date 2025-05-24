@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
             nome: 'Forxiga',
             principio: 'diabetes',
             finalidade: '',
-            lote: 'l004',
+            lote: 'l003',
             dataEntrada: '2025-05-24',
             validade: '2026-06-12',
             quantidade: '50',
@@ -52,41 +52,42 @@ document.addEventListener('DOMContentLoaded', function () {
             ean: ''
         },
         {
-            id: '',
-            nome: '',
-            principio: '',
+            id: '04',
+            nome: 'Atenolol 25mg',
+            principio: 'hipertensão',
             finalidade: '',
-            lote: '',
-            dataEntrada: '',
-            validade: '',
-            quantidade: '',
+            lote: 'l004',
+            dataEntrada: '2025-05-24',
+            validade: '2026-06-12',
+            quantidade: '86',
             fornecedor: 'Fornecedor Padrão',
             ean: ''
         },
         {
-            id: '',
-            nome: '',
-            principio: '',
-            finalidade: '',
-            lote: '',
-            dataEntrada: '',
-            validade: '',
-            quantidade: '',
-            fornecedor: 'Fornecedor Padrão',
-            ean: ''
-        },
+            id: '05',
+            nome: 'Losartana 50mg',
+            principio: 'hipertensão',
+            finalidade: '', 
+            lote: 'l005',
+            dataEntrada: '2025-05-24',
+            validade: '2026-06-12',
+            quantidade: '50',
+          }, 
+            
+        
         {
-            id: '',
-            nome: '',
-            principio: '',
+            id: '06',
+            nome: 'Hidroclorotiazida 25mg',
+            principio: 'hipertensão',
             finalidade: '',
-            lote: '',
-            dataEntrada: '',
-            validade: '',
-            quantidade: '',
+            lote: 'l006',
+            dataEntrada: '2025-05-24',
+            validade: '2026-06-12',
+            quantidade: '50',
             fornecedor: 'Fornecedor Padrão',
             ean: ''
-        },
+           },  
+       
     ];
 
 
