@@ -197,3 +197,7 @@ button:hover {
         font-size: 16px;
     }
 }
+tr.selected {
+    background-color: #d1e7fd;
+}
+

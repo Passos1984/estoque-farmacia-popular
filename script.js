@@ -8,9 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const selectAllCheckbox = document.getElementById('select-all');
     const excluirSelecionadosBtn = document.getElementById('excluir-selecionados');
 
-    // Lista inicial dos 41 medicamentos (exemplo resumido, complete conforme desejar)
+    // Lista inicial dos medicamentos corrigida e padronizada
     let medicamentos = [
-        // ...  
         {
             id: '01',
             nome: 'ACETATO DE MEDROXIPROGESTERONA 150MG',
@@ -23,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function () {
             fornecedor: 'Fornecedor Padrão',
             ean: '7891268101782'
         },
-        // ... 
         {
             id: '02',
             nome: 'SULFATO DE SALBUTAMOL 100MCG',
@@ -31,23 +29,20 @@ document.addEventListener('DOMContentLoaded', function () {
             finalidade: 'Asma',
             lote: 'L002',
             dataEntrada: '2025-05-24',
-            dataEntrada: ' 2025-05-24',
             validade: '2026-06-12',
-            quantidade: '50',
+            quantidade: 50,
             fornecedor: 'Fornecedor Padrão',
             ean: ''
         },
-        
-            
         {
             id: '03',
             nome: 'Forxiga',
             principio: 'diabetes',
             finalidade: '',
-            lote: 'l003',
+            lote: 'L003',
             dataEntrada: '2025-05-24',
             validade: '2026-06-12',
-            quantidade: '50',
+            quantidade: 50,
             fornecedor: 'Fornecedor Padrão',
             ean: ''
         },
@@ -56,10 +51,10 @@ document.addEventListener('DOMContentLoaded', function () {
             nome: 'Atenolol 25mg',
             principio: 'hipertensão',
             finalidade: '',
-            lote: 'l004',
+            lote: 'L004',
             dataEntrada: '2025-05-24',
             validade: '2026-06-12',
-            quantidade: '86',
+            quantidade: 86,
             fornecedor: 'Fornecedor Padrão',
             ean: ''
         },
@@ -67,29 +62,33 @@ document.addEventListener('DOMContentLoaded', function () {
             id: '05',
             nome: 'Losartana 50mg',
             principio: 'hipertensão',
-            finalidade: '', 
-            lote: 'l005',
+            finalidade: '',
+            lote: 'L005',
             dataEntrada: '2025-05-24',
             validade: '2026-06-12',
-            quantidade: '50',
-          }, 
-            
-        
+            quantidade: 50,
+            fornecedor: 'Fornecedor Padrão',
+            ean: ''
+        },
         {
             id: '06',
             nome: 'Hidroclorotiazida 25mg',
             principio: 'hipertensão',
             finalidade: '',
-            lote: 'l006',
+            lote: 'L006',
             dataEntrada: '2025-05-24',
             validade: '2026-06-12',
-            quantidade: '50',
+            quantidade: 50,
             fornecedor: 'Fornecedor Padrão',
             ean: ''
-           },  
-       
+        }
     ];
 
+    // Carrega dados do localStorage, se existirem
+    const dadosSalvos = localStorage.getItem('medicamentos');
+    if (dadosSalvos) {
+        medicamentos = JSON.parse(dadosSalvos);
+    }
 
     function salvarLocalStorage() {
         localStorage.setItem('medicamentos', JSON.stringify(medicamentos));
@@ -103,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <td><input type="checkbox" class="select-item" data-id="${med.id}"></td>
                 <td>${med.id}</td>
                 <td>${med.nome}</td>
-                <td>${med.principio}</td>
+                <td>${med.finalidade}</td>
                 <td>${med.lote}</td>
                 <td>${med.dataEntrada}</td>
                 <td>${med.validade}</td>
@@ -146,6 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const medicacao = document.getElementById('medicacao').value.trim();
         const principio = document.getElementById('principio').value.trim();
+        const finalidade = document.getElementById('finalidade').value.trim();
         const dataEntrada = document.getElementById('data').value;
         const validade = document.getElementById('validade').value;
         const quantidade = Number(document.getElementById('quantidade').value);
@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        medicamentos.push({ id, nome: medicacao, principio, lote, dataEntrada, validade, quantidade, fornecedor });
+        medicamentos.push({ id, nome: medicacao, principio, finalidade, lote, dataEntrada, validade, quantidade, fornecedor });
         salvarLocalStorage();
         renderizarTabela();
         fecharModal();
@@ -183,9 +183,32 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    function atualizarBotaoExcluir() {
+        const anyChecked = tableBody.querySelector('.select-item:checked') !== null;
+        excluirSelecionadosBtn.disabled = !anyChecked;
+    }
+
     selectAllCheckbox.addEventListener('change', function () {
         const checkboxes = tableBody.querySelectorAll('.select-item');
         checkboxes.forEach(cb => cb.checked = selectAllCheckbox.checked);
+        checkboxes.forEach(cb => {
+            const row = cb.closest('tr');
+            if (cb.checked) row.classList.add('selected');
+            else row.classList.remove('selected');
+        });
+        atualizarBotaoExcluir();
+    });
+
+    tableBody.addEventListener('change', function (e) {
+        if (e.target.classList.contains('select-item')) {
+            const row = e.target.closest('tr');
+            if (e.target.checked) {
+                row.classList.add('selected');
+            } else {
+                row.classList.remove('selected');
+            }
+            atualizarBotaoExcluir();
+        }
     });
 
     excluirSelecionadosBtn.addEventListener('click', function () {
@@ -200,6 +223,10 @@ document.addEventListener('DOMContentLoaded', function () {
             salvarLocalStorage();
             renderizarTabela();
             selectAllCheckbox.checked = false;
+            atualizarBotaoExcluir();
         }
     });
+
+    // Inicializa o botão "Excluir Selecionados" desabilitado
+    excluirSelecionadosBtn.disabled = true;
 });
