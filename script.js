@@ -48,23 +48,80 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         {
             id: '04',
-            nome: 'IBUPROFENO 600MG',
-            principio: 'ANALGÉSICO/ANTI-INFLAMATÓRIO',
-            finalidade: 'Alívio da dor e inflamação',
+            nome: 'cloridrato de metformina 500mg',
+            principio: 'diabetes',
+            finalidade: 'diabetes tipo 2',
             lote: 'L004',
             dataEntrada: '2025-05-24',
             validade: '2026-12-30',
             quantidade: 150,
             fornecedor: 'Fornecedor Padrão',
-            ean: ''
-        }
+            ean: '7891234567890'
+        },
+        {
+            id: '05',
+            nome: 'glibenclamida 5mg',
+            principio: 'diabetes', 
+            finalidade: 'diabetes tipo 2',
+            lote: 'L005',
+            dataEntrada: '2025-05-24',
+            validade: '2026-11-20', 
+            quantidade: 80,
+            fornecedor: 'Fornecedor Padrão',
+            ean: '7891234567891'
+        },
+        {
+            id: '07',
+            nome: 'captopril 25mg',
+            principio: 'hipertensão',  
+            finalidade: 'hipertensão arterial',
+            lote: 'L006',
+            dataEntrada: '2025-05-24',
+            validade: '2026-10-15', 
+            quantidade: 120,
+            fornecedor: 'Fornecedor Padrão',    
+            ean: '7891234567892'
+        },
+        {
+            id: '08',
+            nome: 'losartana 50mg',
+            principio: 'hipertensão',
+            finalidade: 'hipertensão arterial',
+            lote: 'L007',
+            dataEntrada: '2025-05-24',
+            validade: '2026-09-10',
+            quantidade: 90,
+            fornecedor: 'Fornecedor Padrão',
+            ean: '7891234567893'
+        },
+        {
+            id: '09',
+            nome: 'atorvastatina 20mg',
+            principio: 'hipercolesterolemia',
+            finalidade: 'redução do colesterol',
+            lote: 'L008',
+            dataEntrada: '2025-05-24',
+            validade: '2026-08-05',
+            quantidade: 110,
+            fornecedor: 'Fornecedor Padrão',
+            ean: '7891234567894'
+        },
+        {
+            id: '10',
+            nome: 'sinvastatina 10mg',
+            principio: 'hipercolesterolemia',
+            finalidade: 'redução do colesterol',
+            lote: 'L009',
+            dataEntrada: '2025-05-24',
+            validade: '2026-07-01',
+            quantidade: 130,
+            fornecedor: 'Fornecedor Padrão',
+            ean: '7891234567895'
+         }   
+        
+           
+        
     ];
-
-    // Carrega dados do localStorage, se existirem
-    const dadosSalvos = localStorage.getItem('medicamentos');
-    if (dadosSalvos) {
-        medicamentos = JSON.parse(dadosSalvos);
-    }
 
     function salvarLocalStorage() {
         localStorage.setItem('medicamentos', JSON.stringify(medicamentos));
