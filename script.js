@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const selectAllCheckbox = document.getElementById('select-all');
     const excluirSelecionadosBtn = document.getElementById('excluir-selecionados');
 
-    // Lista inicial dos medicamentos corrigida e padronizada
-    let medicamentos = [
+    // Lista inicial dos medicamentos (exemplo)
+    let medicamentos = JSON.parse(localStorage.getItem('medicamentos')) || [
         {
             id: '01',
             nome: 'ACETATO DE MEDROXIPROGESTERONA 150MG',
@@ -22,105 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
             fornecedor: 'Fornecedor Padrão',
             ean: '7891268101782'
         },
-        {
-            id: '02',
-            nome: 'SULFATO DE SALBUTAMOL 100MCG',
-            principio: 'ASMA',
-            finalidade: 'Asma',
-            lote: 'L002',
-            dataEntrada: '2025-05-24',
-            validade: '2026-06-12',
-            quantidade: 50,
-            fornecedor: 'Fornecedor Padrão',
-            ean: ''
-        },
-        {
-            id: '03',
-            nome: 'CLORIDRATO DE METFORMINA 850MG',
-            principio: 'DIABETES',
-            finalidade: 'Diabetes Tipo 2',
-            lote: 'L003',
-            dataEntrada: '2025-05-24',
-            validade: '2027-01-15',
-            quantidade: 200,
-            fornecedor: 'Fornecedor Padrão',
-            ean: ''
-        },
-        {
-            id: '04',
-            nome: 'cloridrato de metformina 500mg',
-            principio: 'diabetes',
-            finalidade: 'diabetes tipo 2',
-            lote: 'L004',
-            dataEntrada: '2025-05-24',
-            validade: '2026-12-30',
-            quantidade: 150,
-            fornecedor: 'Fornecedor Padrão',
-            ean: '7891234567890'
-        },
-        {
-            id: '05',
-            nome: 'glibenclamida 5mg',
-            principio: 'diabetes', 
-            finalidade: 'diabetes tipo 2',
-            lote: 'L005',
-            dataEntrada: '2025-05-24',
-            validade: '2026-11-20', 
-            quantidade: 80,
-            fornecedor: 'Fornecedor Padrão',
-            ean: '7891234567891'
-        },
-        {
-            id: '07',
-            nome: 'captopril 25mg',
-            principio: 'hipertensão',  
-            finalidade: 'hipertensão arterial',
-            lote: 'L006',
-            dataEntrada: '2025-05-24',
-            validade: '2026-10-15', 
-            quantidade: 120,
-            fornecedor: 'Fornecedor Padrão',    
-            ean: '7891234567892'
-        },
-        {
-            id: '08',
-            nome: 'losartana 50mg',
-            principio: 'hipertensão',
-            finalidade: 'hipertensão arterial',
-            lote: 'L007',
-            dataEntrada: '2025-05-24',
-            validade: '2026-09-10',
-            quantidade: 90,
-            fornecedor: 'Fornecedor Padrão',
-            ean: '7891234567893'
-        },
-        {
-            id: '09',
-            nome: 'atorvastatina 20mg',
-            principio: 'hipercolesterolemia',
-            finalidade: 'redução do colesterol',
-            lote: 'L008',
-            dataEntrada: '2025-05-24',
-            validade: '2026-08-05',
-            quantidade: 110,
-            fornecedor: 'Fornecedor Padrão',
-            ean: '7891234567894'
-        },
-        {
-            id: '10',
-            nome: 'sinvastatina 10mg',
-            principio: 'hipercolesterolemia',
-            finalidade: 'redução do colesterol',
-            lote: 'L009',
-            dataEntrada: '2025-05-24',
-            validade: '2026-07-01',
-            quantidade: 130,
-            fornecedor: 'Fornecedor Padrão',
-            ean: '7891234567895'
-         }   
-        
-           
-        
+        // Adicione mais itens conforme necessidade
     ];
 
     function salvarLocalStorage() {
@@ -128,9 +30,25 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function renderizarTabela() {
-        tableBody.innerHTML = '';
+        const validade = new Date(med.validade);
+if (validade < hoje) {
+    newRow.classList.add('vencido');
+} else if ((validade - hoje) < 1000 * 60 * 60 * 24 * 30) { // menos de 30 dias
+    newRow.classList.add('alerta-validade');
+    const diffTime = validade.getTime() - hoje.getTime();
+const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+if (diffDays < 0) {
+    newRow.classList.add('vencido');
+} else if (diffDays <= 30) {
+    newRow.classList.add('vencimento-proximo');
+}
+
+}
+
         medicamentos.forEach(med => {
             const newRow = tableBody.insertRow();
+
             newRow.innerHTML = `
                 <td><input type="checkbox" class="select-item" data-id="${med.id}"></td>
                 <td>${med.id}</td>
@@ -143,10 +61,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 <td>${med.fornecedor}</td>
                 <td><button class="delete-btn" data-id="${med.id}">Excluir</button></td>
             `;
-        });
-    }
 
-    renderizarTabela();
+            const validade = new Date(med.validade);
+            if (validade < hoje) {
+                newRow.classList.add('vencido');
+            } else if ((validade - hoje) < 1000 * 60 * 60 * 24 * 30) { // menos de 30 dias
+                newRow.classList.add('alerta-validade');
+            }
+        });
+
+        // Depois de renderizar, atualiza estado do botão e checkbox “select all”
+        atualizarBotaoExcluir();
+        atualizarSelectAllCheckbox();
+    }
 
     function abrirModal() {
         modalAdicionar.style.display = 'block';
@@ -177,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
 
         const medicacao = document.getElementById('medicacao').value.trim();
-        const principio = document.getElementById('principio').value.trim();
+        const principio = document.getElementById('principio') ? document.getElementById('principio').value.trim() : medicacao; // se não existir, usar nome
         const finalidade = document.getElementById('finalidade').value.trim();
         const dataEntrada = document.getElementById('data').value;
         const validade = document.getElementById('validade').value;
@@ -221,10 +148,17 @@ document.addEventListener('DOMContentLoaded', function () {
         excluirSelecionadosBtn.disabled = !anyChecked;
     }
 
+    function atualizarSelectAllCheckbox() {
+        const checkboxes = tableBody.querySelectorAll('.select-item');
+        const checkedBoxes = tableBody.querySelectorAll('.select-item:checked');
+        selectAllCheckbox.checked = checkboxes.length > 0 && checkedBoxes.length === checkboxes.length;
+        selectAllCheckbox.indeterminate = checkedBoxes.length > 0 && checkedBoxes.length < checkboxes.length;
+    }
+
     selectAllCheckbox.addEventListener('change', function () {
         const checkboxes = tableBody.querySelectorAll('.select-item');
-        checkboxes.forEach(cb => cb.checked = selectAllCheckbox.checked);
         checkboxes.forEach(cb => {
+            cb.checked = selectAllCheckbox.checked;
             const row = cb.closest('tr');
             if (cb.checked) row.classList.add('selected');
             else row.classList.remove('selected');
@@ -241,6 +175,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 row.classList.remove('selected');
             }
             atualizarBotaoExcluir();
+            atualizarSelectAllCheckbox();
         }
     });
 
@@ -260,6 +195,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Inicializa o botão "Excluir Selecionados" desabilitado
-    excluirSelecionadosBtn.disabled = true;
+    // Inicializa tudo renderizando a tabela
+    renderizarTabela();
 });

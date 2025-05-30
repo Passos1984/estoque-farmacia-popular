@@ -31,21 +31,22 @@
             <tbody id="estoque-body"></tbody>
         </table>
 
-        <div class="botoes-acoes">
+        <div class="botoes-acoes" style="margin-top: 1em;">
             <button id="adicionar-item">Adicionar Item</button>
-            <button id="excluir-selecionados" class="delete-btn">Excluir Selecionados</button>
+            <!-- Desabilitar botão inicialmente -->
+            <button id="excluir-selecionados" class="delete-btn" disabled>Excluir Selecionados</button>
         </div>
 
-        <div id="modal-adicionar" class="modal">
+        <div id="modal-adicionar" class="modal" style="display:none;">
             <div class="modal-content">
-                <span class="close-button">&times;</span>
+                <span class="close-button" style="cursor:pointer;">&times;</span>
                 <h2>Adicionar Novo Item</h2>
                 <form id="form-adicionar">
                     <label for="medicacao">Medicação:</label>
-                    <input type="text" id="medicacao" name="medicacao" required />
+                    <input type="text" id="medicacao" name="medicacao" required autocomplete="off" />
 
                     <label for="finalidade">Finalidade:</label>
-                    <input type="text" id="finalidade" name="finalidade" required />
+                    <input type="text" id="finalidade" name="finalidade" required autocomplete="off" />
 
                     <label for="data">Data de Entrada:</label>
                     <input type="date" id="data" name="data" required />
@@ -57,13 +58,13 @@
                     <input type="number" id="quantidade" name="quantidade" min="1" required />
 
                     <label for="id">ID:</label>
-                    <input type="text" id="id" name="id" required />
+                    <input type="text" id="id" name="id" required autocomplete="off" />
 
                     <label for="lote">Lote:</label>
-                    <input type="text" id="lote" name="lote" required />
+                    <input type="text" id="lote" name="lote" required autocomplete="off" />
 
                     <label for="fornecedor">Fornecedor:</label>
-                    <input type="text" id="fornecedor" name="fornecedor" required />
+                    <input type="text" id="fornecedor" name="fornecedor" required autocomplete="off" />
 
                     <button type="submit">Adicionar</button>
                 </form>
