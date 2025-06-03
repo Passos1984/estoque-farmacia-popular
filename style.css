@@ -20,3 +20,21 @@ th, td {
 th {
   background-color: #eee;
 }
+/* Estilos para responsividade da tabela */
+@media (max-width: 768px) {
+    table {
+        display: block; /* Impede que a tabela se comporte como um bloco normal */
+        overflow-x: auto; /* Adiciona a barra de rolagem horizontal quando necessário */
+        width: auto; /* Permite que a tabela seja mais larga que o container */
+    }
+
+    /* Opcional: Estilizar o cabeçalho para melhor visualização com rolagem */
+    thead th {
+        white-space: nowrap; /* Evita que o texto do cabeçalho quebre */
+    }
+
+    /* Opcional: Estilizar as células para melhor visualização com rolagem */
+    tbody td {
+        white-space: nowrap; /* Evita que o texto das células quebre */
+    }
+}

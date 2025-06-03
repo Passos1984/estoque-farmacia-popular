@@ -1,31 +1,57 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Estoque - Farmácia Popular</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="shortcut icon" href="farmacia.png" type="farmacia/png" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Estoque - Farmácia Popular</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="farmacia.png" type="farmacia/png" />
 </head>
 <body>
-  <h1>Estoque de Medicamentos</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Data de Entrada</th>
-        <th>Lote</th>
-        <th>Validade</th>
-        <th>Finalidade</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody id="lista-medicamentos-corpo">
-      <!-- Lista de medicamentos será inserida aqui -->
-    </tbody>
-  </table>
+    <h1>Estoque de Medicamentos</h1>
 
-  <script src="script.js"></script>
+    <div id="formulario-adicionar">
+        <h2>Adicionar Novo Medicamento</h2>
+        <form id="form-medicamento">
+            <div>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+            <div>
+                <label for="dataEntrada">Data de Entrada:</label>
+                <input type="date" id="dataEntrada" name="dataEntrada" required>
+            </div>
+            <div>
+                <label for="lote">Lote:</label>
+                <input type="text" id="lote" name="lote">
+            </div>
+            <div>
+                <label for="validade">Validade:</label>
+                <input type="date" id="validade" name="validade" required>
+            </div>
+            <div>
+                <label for="finalidade">Finalidade:</label>
+                <input type="text" id="finalidade" name="finalidade">
+            </div>
+            <button type="submit">Adicionar</button>
+        </form>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Data de Entrada</th>
+                <th>Lote</th>
+                <th>Validade</th>
+                <th>Finalidade</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody id="lista-medicamentos-corpo">
+            </tbody>
+    </table>
+
+    <script src="script.js"></script>
 </body>
 </html>
