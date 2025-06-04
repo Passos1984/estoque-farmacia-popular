@@ -115,3 +115,61 @@ td:nth-child(7) {
 #formulario-adicionar button[type="submit"]:hover {
     background-color: #0056b3;
 }
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  header h1 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .form-container,
+  .table-container {
+    width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  table {
+    font-size: 14px;
+    overflow-x: auto;
+    display: block;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tbody td {
+    display: block;
+    width: 100%;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+  }
+
+  tbody tr {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    display: block;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    display: block;
+  }
+
+  button {
+    width: 100%;
+  }
+}

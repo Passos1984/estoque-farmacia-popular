@@ -29,13 +29,13 @@ function renderizarTabela() {
         }
 
         tr.innerHTML = `
-            <td>${medicamento.nome}</td>
-            <td>${medicamento.dataEntrada}</td>
-            <td>${medicamento.lote || '-'}</td>
-            <td>${medicamento.validade}</td>
-            <td>${medicamento.finalidade || '-'}</td>
-            <td>${medicamento.quantidade !== undefined ? medicamento.quantidade : '-'}</td>
-            <td><button onclick="removerMedicamento(${index})">Remover</button></td>
+            <td data-label="Nome">${medicamento.nome}</td>
+            <td data-label="Data Entrada">${medicamento.dataEntrada}</td>
+            <td data-label="Lote">${medicamento.lote || '-'}</td>
+            <td data-label="Validade">${medicamento.validade}</td>
+            <td data-label="Finalidade">${medicamento.finalidade || '-'}</td>
+            <td data-label="Quantidade">${medicamento.quantidade !== undefined ? medicamento.quantidade : '-'}</td>
+            <td data-label="Ações"><button onclick="removerMedicamento(${index})">Remover</button></td>
         `;
 
         listaMedicamentosCorpo.appendChild(tr);
