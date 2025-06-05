@@ -188,3 +188,9 @@ button:hover {
 button:active {
   transform: scale(0.95);
 }
+/* Estilo de foco para inputs e botões */
+input:focus,
+button:focus {
+    outline: 2px solid #007bff; /* Azul para foco */
+    outline-offset: 2px; /* Distância do contorno em relação ao elemento */
+}

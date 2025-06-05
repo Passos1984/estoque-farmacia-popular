@@ -2,6 +2,14 @@ const form = document.getElementById('form-medicamento');
 const corpoTabela = document.getElementById('lista-medicamentos-corpo');
 
 let medicamentos = JSON.parse(localStorage.getItem('medicamentos')) || [];
+// Função para validar medicamento
+function validarMedicamento(medicamento) {
+  if (!medicamento.nome || !medicamento.validade || medicamento.quantidade < 0) {
+    return false;
+  }
+  return true;
+}
+
 
 function salvarNoLocalStorage() {
   localStorage.setItem('medicamentos', JSON.stringify(medicamentos));
@@ -18,15 +26,14 @@ function criarLinha(medicamento, index) {
   let classeValidade = '';
 
   if (diasRestantes < 0) {
-    classeValidade = 'validade-vencida';
+    classeValidade = 'validade-vencida'; //vermelho
   } else if (diasRestantes <= 7) {
-    classeValidade = 'validade-critica';
+    classeValidade = 'validade-critica'; //vermelho escuro
   } else if (diasRestantes <= 30) {
-    classeValidade = 'validade-proxima';
+    classeValidade = 'validade-proxima'; //vermelho claro
   } else {
-    classeValidade = 'validade-longa';
+    classeValidade = 'validade-longa'; //verde
   }
-
   tr.innerHTML = `
     <td data-label="Nome">${medicamento.nome}</td>
     <td data-label="Data de Entrada">${medicamento.dataEntrada}</td>
