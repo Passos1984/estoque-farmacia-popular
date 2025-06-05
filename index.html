@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+
   <title>Estoque - Farmácia Popular</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="shortcut icon" href="img/farmacia.png" type="image/png" />
@@ -19,7 +19,7 @@
       <form id="form-medicamento">
         <div>
           <label for="nome">Nome:</label>
-          <input type="text" id="nome" name="nome" required maxlength="100" placeholder="Ex: Paracetamol"/>
+          <input type="text" id="nome" name="nome" required />
         </div>
         <div>
           <label for="dataEntrada">Data de Entrada:</label>
@@ -27,7 +27,7 @@
         </div>
         <div>
           <label for="lote">Lote:</label>
-          <input type="text" id="lote" name="lote" maxlength="50"/>
+          <input type="text" id="lote" name="lote" />
         </div>
         <div>
           <label for="validade">Validade:</label>
@@ -35,13 +35,13 @@
         </div>
         <div>
           <label for="finalidade">Finalidade:</label>
-          <input type="text" id="finalidade" name="finalidade" maxlength="100"/>
+          <input type="text" id="finalidade" name="finalidade" />
         </div>
         <div>
           <label for="quantidade">Quantidade:</label>
-          <input type="number" id="quantidade" name="quantidade" min="1"/>
+          <input type="number" id="quantidade" name="quantidade" min="0" />
         </div>
-        <button type="submit" disabled>Adicionar</button>
+        <button type="submit">Adicionar</button>
       </form>
     </section>
 
@@ -63,6 +63,7 @@
     </section>
   </main>
 
-  <script src="script.js" defer></script>
+  <script src="script.js"></script>
+
 </body>
 </html>
